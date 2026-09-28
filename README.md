@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [apigateway-rest-invoke-url-dotnet](labs/apigateway-rest-invoke-url-dotnet) | Build, deploy and call a REST API on Floci, and the invoke URL that differs from AWS's | .NET 10, API Gateway |
 
 > _Your lab here. Open a PR._
 
