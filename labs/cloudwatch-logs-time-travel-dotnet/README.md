@@ -68,4 +68,4 @@ Glen Souza · built for the **FlociLab** series (Floci is pronounced "floss-see"
 
 - Video: _link to come_
 - Blog post: _link to come_
-- Full sample, with a Blazor demo page and an integration test, in a .NET Aspire gallery covering Floci's AWS, Azure, GCP and OCI emulators: [github.com/glensouza/floci](https://github.com/glensouza/floci)
+- Full sample, with a Blazor demo page and an integration test, in a .NET Aspire gallery covering Floci's AWS, Azure, GCP and OCI emulators: [github.com/glensouza/flocilab](https://github.com/glensouza/flocilab)
