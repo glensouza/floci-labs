@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [cloudwatch-logs-time-travel-dotnet](labs/cloudwatch-logs-time-travel-dotnet) | CloudWatch Logs from one C# file, and a 2001 log event Floci accepts but AWS would reject | .NET 10, CloudWatch Logs |
 
 > _Your lab here. Open a PR._
 
