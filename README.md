@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [swf-no-delete-dotnet](labs/swf-no-delete-dotnet) | SWF has no delete: a deprecated domain name is spent forever, and an empty poll returns instantly | .NET 10, SWF |
 
 > _Your lab here. Open a PR._
 
