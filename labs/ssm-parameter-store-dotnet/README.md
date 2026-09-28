@@ -62,6 +62,7 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 - Replace `GetParameter` with `GetParametersByPath` on `prefix` with `Recursive = true`. This is how most apps load their config at startup.
 - Remove the `Overwrite = true` and watch step 3 fail the same way step 2 does.
 - Point it at real AWS by deleting the three Floci lines, and see that the `SecureString` comes back as ciphertext.
+- **Move the secret to a different cloud.** Floci also emulates Azure (`floci/floci-az`, port 4577), GCP (`floci/floci-gcp`, port 4588) and OCI (`floci/floci-oci`, port 4599). Store `hunter2` in that cloud's secrets service with its own official SDK, and compare what each one does with the value. FlociLab has working .NET samples to start from: [Azure Key Vault secrets](https://github.com/glensouza/flocilab/tree/main/samples/azure/keyvaultsecrets), [GCP Secret Manager](https://github.com/glensouza/flocilab/tree/main/samples/gcp/secretmanager) and [OCI Secrets](https://github.com/glensouza/flocilab/tree/main/samples/oci/secrets).
 
 ## Author
 
@@ -69,4 +70,4 @@ Glen Souza · built for the **FlociLab** series (Floci is pronounced "floss-see"
 
 - Video: _link to come_
 - Blog post: _link to come_
-- Full sample, with a Blazor demo page and an integration test, in a .NET Aspire gallery covering Floci's AWS, Azure, GCP and OCI emulators: [github.com/glensouza/floci](https://github.com/glensouza/floci)
+- Full sample, with a Blazor demo page and an integration test, in a .NET Aspire gallery covering Floci's AWS, Azure, GCP and OCI emulators: [github.com/glensouza/flocilab](https://github.com/glensouza/flocilab)
