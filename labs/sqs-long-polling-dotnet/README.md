@@ -61,6 +61,7 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 - Don't delete the message, then receive again with `VisibilityTimeout = 2` on the first receive. Does it come back after 2 seconds?
 - Send 15 messages and receive with `MaxNumberOfMessages = 10`. How many do you get per call?
 - Add a `MessageAttributes` entry on send and ask for it back with `MessageAttributeNames = ["All"]`.
+- **Do the same round trip on a different cloud.** Floci also emulates Azure (`floci/floci-az`, port 4577), GCP (`floci/floci-gcp`, port 4588) and OCI (`floci/floci-oci`, port 4599). Every cloud has its own answer to "receive, then delete", and they don't agree on what a receipt is or how long a receive waits. FlociLab has working .NET samples to start from: [Azure Queue Storage](https://github.com/glensouza/flocilab/tree/main/samples/azure/queue), [Azure Service Bus](https://github.com/glensouza/flocilab/tree/main/samples/azure/servicebus), [GCP Pub/Sub](https://github.com/glensouza/flocilab/tree/main/samples/gcp/pubsub) and [OCI Queue](https://github.com/glensouza/flocilab/tree/main/samples/oci/queue).
 
 ## Author
 
@@ -68,4 +69,4 @@ Glen Souza · built for the **FlociLab** series (Floci is pronounced "floss-see"
 
 - Video: _link to come_
 - Blog post: _link to come_
-- Full sample, with a Blazor demo page and an integration test, in a .NET Aspire gallery covering Floci's AWS, Azure, GCP and OCI emulators: [github.com/glensouza/floci](https://github.com/glensouza/floci)
+- Full sample, with a Blazor demo page and an integration test, in a .NET Aspire gallery covering Floci's AWS, Azure, GCP and OCI emulators: [github.com/glensouza/flocilab](https://github.com/glensouza/flocilab)
