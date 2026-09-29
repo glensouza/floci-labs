@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [route53-instant-insync-dotnet](labs/route53-instant-insync-dotnet) | A Route 53 hosted zone and record from .NET, and the change that is never PENDING on Floci | .NET 10, Route 53 |
 
 > _Your lab here. Open a PR._
 
