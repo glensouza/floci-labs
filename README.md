@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [elbv2-default-subnets-dotnet](labs/elbv2-default-subnets-dotnet) | An Application Load Balancer from .NET on Floci's default subnets, with no EC2 package, and the empty subnet list Floci lets through | .NET 10, ELB v2 |
 
 > _Your lab here. Open a PR._
 
