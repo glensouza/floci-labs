@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [cloudfront-disable-before-delete-dotnet](labs/cloudfront-disable-before-delete-dotnet) | A CloudFront distribution from .NET, and the disable-wait-delete that never waits on Floci | .NET 10, CloudFront |
 
 > _Your lab here. Open a PR._
 
