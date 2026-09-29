@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [cloudmap-data-host-prefix-dotnet](labs/cloudmap-data-host-prefix-dotnet) | Cloud Map service discovery from .NET, and the `data-` host prefix that breaks only `DiscoverInstances` | .NET 10, Cloud Map |
 
 > _Your lab here. Open a PR._
 
