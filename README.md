@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [route53resolver-delete-in-use-dotnet](labs/route53resolver-delete-in-use-dotnet) | A Route 53 Resolver rule and VPC association from .NET, and the delete Floci allows while the rule is in use | .NET 10, Route 53 Resolver |
 
 > _Your lab here. Open a PR._
 
