@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [cognito-lax-pool-dotnet](labs/cognito-lax-pool-dotnet) | Cognito sign-in from .NET, and the two pool settings Floci never checks | .NET 10, Cognito |
 
 > _Your lab here. Open a PR._
 
