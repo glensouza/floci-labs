@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [organizations-scp-enabled-dotnet](labs/organizations-scp-enabled-dotnet) | AWS Organizations from .NET, and the SCP policy type Floci enables that AWS leaves off | .NET 10, AWS Organizations |
 
 > _Your lab here. Open a PR._
 
