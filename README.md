@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [accessanalyzer-unknown-operation-dotnet](labs/accessanalyzer-unknown-operation-dotnet) | IAM Access Analyzer from .NET, and the 404 Floci gives an operation it doesn't implement | .NET 10, IAM Access Analyzer |
 
 > _Your lab here. Open a PR._
 
