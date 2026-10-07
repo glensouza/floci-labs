@@ -56,7 +56,7 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 
 **It cleans up.** Deleting the pool takes the clients and the user with it, in a `finally`, so running the lab twice gives the same result.
 
-**About the issuer.** If an API validates these tokens with JWT bearer auth, set its authority from the token's `iss` claim, not from your configured endpoint. The JWKS at `/<pool id>/.well-known/jwks.json` serves the signing key.
+**About the issuer.** If an API validates these tokens with JWT bearer auth, set its authority from the token's `iss` claim, not from your configured endpoint.
 
 ## Try changing...
 
