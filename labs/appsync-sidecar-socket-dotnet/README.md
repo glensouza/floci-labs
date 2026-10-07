@@ -77,7 +77,7 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 
 ## Try changing...
 
-- Swap the VTL templates for an `APPSYNC_JS` resolver (`Runtime = { Name = "APPSYNC_JS", RuntimeVersion = "1.0.0" }` and a `Code` string). Floci 2.2.0 runs those in the same sidecar.
+- Swap the VTL templates for an `APPSYNC_JS` resolver (`Runtime = { Name = "APPSYNC_JS", RuntimeVersion = "1.0.0" }` and a `Code` string). Floci 2.2.0's release notes say it runs those through a Node sidecar; this lab hasn't tried it.
 - Put a deliberate error in the request template. GraphQL reports it in an `errors` array inside an HTTP 200, so a status check alone won't see it.
 - Query a field that doesn't exist in the schema and look at the status code.
 
