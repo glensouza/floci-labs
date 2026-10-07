@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [sts-role-must-exist-dotnet](labs/sts-role-must-exist-dotnet) | AssumeRole from .NET: the role has to exist, and on Floci it works the instant it does | .NET 10, STS, IAM |
 
 > _Your lab here. Open a PR._
 
