@@ -14,7 +14,7 @@
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: Route 53 Resolver
 - NuGet: `AWSSDK.Route53Resolver` 4.0.100.15, pinned in the `#:package` line at the top of `lab.cs`
-- Last verified against: Floci 2.1.0 (`floci/floci:latest`, September 2026)
+- Last verified against: Floci 2.2.0 (`floci/floci:latest`, October 2026)
 
 ## Run it
 
