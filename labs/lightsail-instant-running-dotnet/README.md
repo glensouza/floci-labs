@@ -63,10 +63,6 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 - Create the same instance name twice and read the error. (Floci refuses it: `InvalidInputException: Instance … already exists`.)
 - Call `CreateInstanceSnapshot`. (Floci answers HTTP 400 `UnsupportedOperation`: recognised, not implemented.)
 
-## Try it on a different cloud
-
-- The FlociLab gallery has compute-adjacent samples on Floci's other emulators too, each with one official SDK: [github.com/glensouza/flocilab/tree/main/samples](https://github.com/glensouza/flocilab/tree/main/samples).
-
 ## Author
 
 Glen Souza · built for the **FlociLab** series (Floci is pronounced "floss-see")

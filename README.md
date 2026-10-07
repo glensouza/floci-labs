@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [lightsail-instant-running-dotnet](labs/lightsail-instant-running-dotnet) | A Lightsail instance from .NET that is running before it boots, with nothing behind its address | .NET 10, Lightsail |
 
 > _Your lab here. Open a PR._
 
