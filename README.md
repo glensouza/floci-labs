@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [verifiedpermissions-cedar-sidecar-dotnet](labs/verifiedpermissions-cedar-sidecar-dotnet) | Amazon Verified Permissions from .NET, with real Cedar in a sidecar that needs the Docker socket | .NET 10, Verified Permissions |
 
 > _Your lab here. Open a PR._
 
