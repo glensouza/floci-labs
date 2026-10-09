@@ -54,7 +54,7 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 
 **`System.Environment`, spelled out.** `Amazon.AppConfig.Model` has a type called `Environment` too, so the plain name is ambiguous in a file that imports it.
 
-**Cleanup leaves the environment behind.** Floci has not built `DeleteEnvironment` (HTTP 404), and deleting the application does not take it with it. Real AppConfig refuses to delete an application that still has environments, so on AWS the order matters; on Floci the leftover environment is harmless, but it stays until the container goes.
+**Cleanup leaves the environment behind.** Floci has not built `DeleteEnvironment` (HTTP 404, `UnknownOperationException`), and deleting the application does not take it with it: `ListEnvironments` still lists it under the deleted application's id. It is harmless, and it stays until the container goes.
 
 **Don't run this against a real account as written.** On AWS the deployment of version 9 is refused, so nothing is deployed, but the lab creates real resources and has no wait for a deployment still baking.
 
@@ -62,7 +62,7 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 
 - Deploy version 1, the one that exists. Floci reads `COMPLETE` at once. Real AppConfig reads `DEPLOYING`, then `BAKING` for `AllAtOnce`'s ten-minute bake.
 - Run the lab twice against the same Floci and watch the deployment number. Each run makes a new environment, and on AWS each environment's deployments start at 1. On Floci 2.2.0 the second run's first deployment was number 2.
-- Change the application's description with `UpdateApplication`. Floci answers HTTP 405 with no body, not a 501.
+- Change the application's description with `UpdateApplication`. Floci answers HTTP 405 with no body, not a 501, and so do the other three update operations.
 
 ## Author
 
