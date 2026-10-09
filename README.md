@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [cloudformation-unchecked-template-dotnet](labs/cloudformation-unchecked-template-dotnet) | CloudFormation from .NET, and the stack built from a resource type that does not exist which Floci reports CREATE_COMPLETE | .NET 10, CloudFormation |
 
 > _Your lab here. Open a PR._
 
