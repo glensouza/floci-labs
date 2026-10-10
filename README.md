@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [efs-unchecked-policy-dotnet](labs/efs-unchecked-policy-dotnet) | EFS from .NET: the creation token and in-use rules hold, and a resource policy that isn't JSON is stored on Floci | .NET 10, EFS |
 
 > _Your lab here. Open a PR._
 
