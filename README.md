@@ -55,6 +55,7 @@ docker run -d --name floci -p 4566:4566 \
 |-----|--------------|-------|
 | [example-s3-photo-gallery](labs/example-s3-photo-gallery) | A tiny photo gallery backed by local S3 | Node.js, S3 |
 | [eks-hello-cluster](labs/eks-hello-cluster) | Full EKS control-plane lifecycle on Floci, plus a kubectl workload bonus | Bash, AWS CLI, EKS/k3s |
+| [s3tables-rename-arn-dotnet](labs/s3tables-rename-arn-dotnet) | S3 Tables from .NET: a rename that changes the table's ARN on Floci, where AWS keeps it | .NET 10, S3 Tables |
 
 > _Your lab here. Open a PR._
 
