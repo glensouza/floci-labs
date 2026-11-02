@@ -14,7 +14,7 @@
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: AppConfig
 - NuGet: `AWSSDK.AppConfig` 4.0.101.14, pinned in the `#:package` line at the top of `lab.cs`
-- Last verified against: Floci 2.2.0 (`floci/floci:latest`, October 2026)
+- Last verified against: Floci 2.4.0 (`floci/floci:latest`, November 2026)
 
 ## Run it
 
@@ -41,7 +41,7 @@ StartDeployment of version 9            -> deployment 1, version 9, COMPLETE
 Floci deployed a configuration version that does not exist, and reported the deployment done.
   Code that relies on AppConfig refusing a bad version number never sees that refusal here.
 
-Cleanup -> removed 1 version(s), the profile, not the environment (HTTP 404), the application; application still listed: no
+Cleanup -> removed 1 version(s), the profile, the environment, the application; application still listed: no
 ```
 
 Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
@@ -54,14 +54,13 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 
 **`System.Environment`, spelled out.** `Amazon.AppConfig.Model` has a type called `Environment` too, so the plain name is ambiguous in a file that imports it.
 
-**Cleanup leaves the environment behind.** Floci has not built `DeleteEnvironment` (HTTP 404, `UnknownOperationException`), and deleting the application does not take it with it: `ListEnvironments` still lists it under the deleted application's id. It is harmless, and it stays until the container goes.
+**Cleanup deletes the environment.** The lab deletes it before the application. An earlier version of this lab, run on Floci 2.2.0, could not: `DeleteEnvironment` answered HTTP 404 with `UnknownOperationException` and the environment stayed listed. Floci 2.4.0 serves it.
 
 **Don't run this against a real account as written.** On AWS the deployment of version 9 is refused, so nothing is deployed, but the lab creates real resources and has no wait for a deployment still baking.
 
 ## Try changing...
 
 - Deploy version 1, the one that exists. Floci reads `COMPLETE` at once. Real AppConfig reads `DEPLOYING`, then `BAKING` for `AllAtOnce`'s ten-minute bake.
-- Run the lab twice against the same Floci and watch the deployment number. Each run makes a new environment, and on AWS each environment's deployments start at 1. On Floci 2.2.0 the second run's first deployment was number 2.
 - Change the application's description with `UpdateApplication`. Floci answers HTTP 405 with no body, not a 501, and so do the other three update operations.
 
 ## Author
