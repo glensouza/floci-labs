@@ -69,7 +69,7 @@ try
     Console.WriteLine();
     Console.WriteLine(validated.StartsWith("valid", StringComparison.Ordinal)
         ? "Floci accepted a body that is not a template: ValidateTemplate does not read it."
-        : "Floci refused a body that is not a template: it may validate templates now. Re-read this lab.");
+        : "Floci refused a body that is not a template, as AWS does.");
     Console.WriteLine(status == "CREATE_COMPLETE"
         ? "Floci created a stack from a resource type that does not exist, and it read CREATE_COMPLETE at once.\n  A typo in a resource type passes here and fails on AWS."
         : $"Floci answered {status}: it may check resource types now. Re-read this lab.");

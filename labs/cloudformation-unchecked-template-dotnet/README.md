@@ -1,12 +1,12 @@
 # CloudFormation in .NET: a stack built from a resource type that does not exist
 
-> Create a CloudFormation stack from a single C# file, and read it straight back. The catch: real CloudFormation refuses a template whose resource type it does not recognise, before it creates anything. Floci does not check resource types, so a stack whose one resource is `AWS::Nope::Thing` reads `CREATE_COMPLETE` the moment the call returns, with a physical ID to show for it. `ValidateTemplate` does not read the body either: text that is not a template passes.
+> Create a CloudFormation stack from a single C# file, and read it straight back. The catch: real CloudFormation refuses a template whose resource type it does not recognise, before it creates anything. Floci does not check resource types, so a stack whose one resource is `AWS::Nope::Thing` reads `CREATE_COMPLETE` the moment the call returns, with a physical ID to show for it.
 
 ## What it shows
 
 - CloudFormation from .NET with the official `AWSSDK.CloudFormation` package, and no Floci-specific library.
 - **Resource types are never checked.** A template whose one resource has the type `AWS::Nope::Thing` creates a stack that reads `CREATE_COMPLETE` on the first `DescribeStacks`, and `DescribeStackResources` lists the resource as `CREATE_COMPLETE` with a physical ID. On AWS, `CreateStack` answers `ValidationError` (Unrecognized resource types) and no stack exists, so a typo in a resource type passes here and fails on AWS.
-- **`ValidateTemplate` does not read the body.** The text `this is not a template` validates, with zero parameters. On AWS it draws `ValidationError`.
+- **`ValidateTemplate` now reads the body.** The text `this is not a template` answers `ValidationError` (HTTP 400, `Template format error: unsupported structure.`), as AWS does. An earlier version of this lab, run on Floci 2.2.0, saw it pass with zero parameters.
 - **No waiting.** Floci provisions a stack before `CreateStack` returns. Real CloudFormation reads `CREATE_IN_PROGRESS` for as long as the resources take.
 - The lab prints what it saw for each one and says which way it went, so it tells you if Floci starts checking templates.
 
@@ -15,7 +15,7 @@
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: CloudFormation
 - NuGet: `AWSSDK.CloudFormation` 4.0.103, pinned in the `#:package` line at the top of `lab.cs`
-- Last verified against: Floci 2.2.0 (`floci/floci:latest`, October 2026)
+- Last verified against: Floci 2.4.0 (`floci/floci:latest`, November 2026)
 
 ## Run it
 
@@ -34,11 +34,11 @@ dotnet run lab.cs
 Expected output (the physical ID changes every run):
 
 ```text
-Validate a body that is not a template  -> valid, 0 parameter(s)
+Validate a body that is not a template  -> ValidationError (HTTP 400): Template format error: unsupported structure.
 A stack with type AWS::Nope::Thing      -> CREATE_COMPLETE
 What the stack says it provisioned      -> Thing AWS::Nope::Thing CREATE_COMPLETE -> Thing-c952b120
 
-Floci accepted a body that is not a template: ValidateTemplate does not read it.
+Floci refused a body that is not a template, as AWS does.
 Floci created a stack from a resource type that does not exist, and it read CREATE_COMPLETE at once.
   A typo in a resource type passes here and fails on AWS.
 
