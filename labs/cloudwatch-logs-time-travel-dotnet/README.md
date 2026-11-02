@@ -12,7 +12,7 @@
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: CloudWatch Logs
 - NuGet: `AWSSDK.CloudWatchLogs` 4.0.104.1, pinned in the `#:package` line at the top of `lab.cs`
-- Last verified against: Floci 2.1.0 (`floci/floci:latest`, September 2026)
+- Last verified against: Floci 2.4.0 (`floci/floci:latest`, November 2026)
 
 ## Run it
 
