@@ -15,7 +15,7 @@ The fix isn't a poll loop that never loops locally. Assert a **set** of states t
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: EventBridge Pipes, SQS
 - NuGet: `AWSSDK.Pipes` 4.0.100.12 and `AWSSDK.SQS` 4.0.100.11, pinned in the `#:package` lines at the top of `lab.cs`
-- Last verified against: Floci 2.1.0 (`floci/floci:latest`, September 2026)
+- Last verified against: Floci 2.4.0 (`floci/floci:latest`, November 2026)
 
 ## Run it
 
