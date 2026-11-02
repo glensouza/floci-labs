@@ -15,7 +15,7 @@
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: AppConfig, AppConfigData
 - NuGet: `AWSSDK.AppConfigData` 4.0.100.17 and `AWSSDK.AppConfig` 4.0.101.14, pinned in the `#:package` lines at the top of `lab.cs`. Two packages because AppConfigData only reads a configuration that has been deployed, and deploying one is AppConfig, a separate SDK.
-- Last verified against: Floci 2.2.0 (`floci/floci:latest`, October 2026)
+- Last verified against: Floci 2.4.0 (`floci/floci:latest`, November 2026)
 
 ## Run it
 
@@ -46,7 +46,7 @@ An unchanged configuration comes back as an empty body, as AWS documents: it mea
 Floci answered a poll 0 s into a 60 s minimum interval. AWS documents that a session can't poll more often than that,
   so a tight polling loop that works here does not carry over.
 
-Cleanup -> removed 1 version(s), the profile, not the environment (HTTP 404), the application; application still listed: no
+Cleanup -> removed 1 version(s), the profile, the environment, the application; application still listed: no
 ```
 
 Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
@@ -59,7 +59,7 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 
 **`System.Environment`, spelled out.** `Amazon.AppConfig.Model` has a type called `Environment` too, so the plain name is ambiguous in a file that imports it.
 
-**Cleanup leaves the environment behind.** Floci has not built `DeleteEnvironment` (HTTP 404, `UnknownOperationException`). It is harmless, and it stays until the container goes.
+**Cleanup deletes the environment.** The lab deletes it before the application. An earlier version of this lab, run on Floci 2.2.0, could not: `DeleteEnvironment` answered HTTP 404 with `UnknownOperationException` and the environment stayed listed. Floci 2.4.0 serves it.
 
 **Don't run this against a real account as written.** It creates and deploys real resources, an `AllAtOnce` deployment bakes for ten minutes on AWS, and the second poll comes inside the session's interval.
 

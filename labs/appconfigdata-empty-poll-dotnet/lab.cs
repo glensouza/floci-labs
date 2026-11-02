@@ -157,7 +157,7 @@ finally
                 await appConfig.DeleteEnvironmentAsync(new DeleteEnvironmentRequest { ApplicationId = applicationId, EnvironmentId = environmentId });
                 removed.Add("the environment");
             }
-            // Floci has not built DeleteEnvironment; it stays until the container goes.
+            // Floci 2.2.0 had not built DeleteEnvironment (floci 2.4.0 serves it); this keeps the lab working on an older emulator.
             catch (AmazonAppConfigException ex) when (ex.StatusCode != 0)
             {
                 removed.Add($"not the environment (HTTP {(int)ex.StatusCode})");
