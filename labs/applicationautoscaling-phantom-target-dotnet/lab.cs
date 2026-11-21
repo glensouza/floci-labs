@@ -96,7 +96,8 @@ try
     string deregister = await AnswerAsync(() => scaling.DeregisterScalableTargetAsync(new DeregisterScalableTargetRequest { ServiceNamespace = ServiceNamespace.Dynamodb, ResourceId = gone, ScalableDimension = ScalableDimension.DynamodbTableWriteCapacityUnits }));
     Console.WriteLine($"Deregister a target never registered -> {deregister}");
 
-    // AWS: accepted. Floci answers HTTP 400 UnsupportedOperation, not 501.
+    // AWS: accepted. Floci 2.5.0 builds scheduled actions for an ECS service's desired count only
+    // and refuses a table with ValidationException; 2.4.0 answered HTTP 400 UnsupportedOperation.
     string scheduled = await AnswerAsync(() => scaling.PutScheduledActionAsync(new PutScheduledActionRequest
     {
         ScheduledActionName = $"lab-{run}-nightly",
@@ -114,9 +115,12 @@ try
     Console.WriteLine(refusalsMissed == 2
         ? "Floci registered a table that does not exist and a minimum above the maximum; AWS refuses both.\n  Code that relies on Application Auto Scaling to catch these passes here and is untested."
         : $"Floci accepted {refusalsMissed} of the two registrations AWS refuses. Its validation changed: re-read this lab.");
-    Console.WriteLine(scheduled.StartsWith("UnsupportedOperation", StringComparison.Ordinal)
-        ? "Scheduled actions are not built yet: Floci answers UnsupportedOperation."
-        : "Floci answered the scheduled action differently: it may have built them. Re-read this lab.");
+    Console.WriteLine(
+        scheduled.Contains("ECS desired count only", StringComparison.Ordinal)
+            ? "Scheduled actions are built for ECS only: Floci refuses a table with ValidationException,\n  where AWS accepts a cron schedule on one."
+        : scheduled.StartsWith("UnsupportedOperation", StringComparison.Ordinal)
+            ? "Scheduled actions are not built: Floci answers UnsupportedOperation."
+            : "Floci answered the scheduled action differently: it may schedule tables now. Re-read this lab.");
 }
 finally
 {

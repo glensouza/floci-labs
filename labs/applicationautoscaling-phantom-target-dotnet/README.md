@@ -1,6 +1,6 @@
 # Application Auto Scaling in .NET: autoscaling a table that does not exist
 
-> Register a DynamoDB table's write capacity with Application Auto Scaling from a single C# file, give it a target-tracking policy, and read both back. The catch: the table does not exist. Floci registers it anyway, accepts a minimum above the maximum, and answers `UnsupportedOperation` for a scheduled action. Real AWS refuses the first two and accepts the third.
+> Register a DynamoDB table's write capacity with Application Auto Scaling from a single C# file, give it a target-tracking policy, and read both back. The catch: the table does not exist. Floci registers it anyway, accepts a minimum above the maximum, and refuses a scheduled action on the table, because it builds them for ECS only. Real AWS refuses the first two and accepts the third.
 
 ## What it shows
 
@@ -8,15 +8,15 @@
 - **The API works like AWS:** `RegisterScalableTarget` stores the range, `DescribeScalableTargets` reads it back, a target-tracking `PutScalingPolicy` creates its two CloudWatch alarms, and deregistering a target that was never registered is refused with `ObjectNotFoundException`, as on AWS.
 - **Resource ids are not looked up.** Real Application Auto Scaling answers `ValidationException` for a table that does not exist. Floci registers `table/lab-…` and lets a policy attach to it.
 - **Capacity ranges are not checked.** Real Application Auto Scaling answers `ValidationException` when `MinCapacity` is above `MaxCapacity`. Floci accepts `10..1`.
-- **Scheduled actions are not built.** `PutScheduledAction` answers HTTP 400 `UnsupportedOperation`, not a 501. Real AWS accepts the call.
-- The lab prints what it saw for each one and says which way it went, so it tells you if Floci starts validating or builds scheduled actions.
+- **Scheduled actions are ECS-only.** Floci 2.5.0 refuses a scheduled action on a table with `ValidationException` ("Scheduled actions support ECS desired count only."). Floci 2.4.0 answered every scheduled-action call with HTTP 400 `UnsupportedOperation`. Real AWS accepts the call.
+- The lab prints what it saw for each one and says which way it went, so it tells you if Floci starts validating or schedules tables.
 
 ## Stack
 
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: Application Auto Scaling (with DynamoDB as the scalable dimension's namespace; no table is created)
 - NuGet: `AWSSDK.ApplicationAutoScaling` 4.0.100.16, pinned in the `#:package` line at the top of `lab.cs`
-- Last verified against: Floci 2.4.0 (`floci/floci:latest`, November 2026)
+- Last verified against: Floci 2.5.0 (`floci/floci:latest`, November 2026)
 
 ## Run it
 
@@ -40,11 +40,12 @@ Read it back                         -> table/lab-e958b6e27fb4, 1..10
 Target-tracking policy at 70%        -> 2 CloudWatch alarm(s) created with it
 MinCapacity 10, MaxCapacity 1        -> accepted
 Deregister a target never registered -> ObjectNotFoundException: No scalable target found for service namespace: dynamodb, resource ID: table/lab-e958b6e27fb4-gone, scalable dimension: dynamodb:table:WriteCapacityUnits
-A nightly scheduled action           -> UnsupportedOperation: Operation PutScheduledAction is not supported.
+A nightly scheduled action           -> ValidationException: Scheduled actions support ECS desired count only.
 
 Floci registered a table that does not exist and a minimum above the maximum; AWS refuses both.
   Code that relies on Application Auto Scaling to catch these passes here and is untested.
-Scheduled actions are not built yet: Floci answers UnsupportedOperation.
+Scheduled actions are built for ECS only: Floci refuses a table with ValidationException,
+  where AWS accepts a cron schedule on one.
 
 Cleanup -> 2 target(s) deregistered, 0 policy(ies) left on the table
 ```
