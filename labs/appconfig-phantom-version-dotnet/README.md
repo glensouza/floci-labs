@@ -1,12 +1,12 @@
 # AppConfig in .NET: deploying a configuration version that does not exist
 
-> Publish a feature-flag configuration to AWS AppConfig from a single C# file, check that version 9 does not exist, and then deploy version 9 anyway. Real AppConfig refuses a version the configuration profile does not have. Floci starts the deployment, records version 9, and reports it `COMPLETE`.
+> Publish a feature-flag configuration to AWS AppConfig from a single C# file, check that version 9 does not exist, and then deploy version 9 anyway. Real AppConfig refuses a version the configuration profile does not have. Floci starts the deployment, records version 9, and bakes it like any other.
 
 ## What it shows
 
 - AppConfig from .NET with the official `AWSSDK.AppConfig` package, and no Floci-specific library: an application, an environment, a hosted configuration profile and one hosted version, deployed with `AppConfig.AllAtOnce`, a strategy AppConfig ships with.
 - **The version really is missing.** `GetHostedConfigurationVersion` for version 9 answers `ResourceNotFoundException`, as it should.
-- **The deployment goes through anyway.** `StartDeployment` with `ConfigurationVersion = "9"` is accepted, and `GetDeployment` reads `version 9, COMPLETE`. Code that relies on AppConfig refusing a bad version number, such as a release script that passes the wrong number, never sees that refusal here.
+- **The deployment goes through anyway.** `StartDeployment` with `ConfigurationVersion = "9"` is accepted, and the deployment reads `version 9, BAKING` (`COMPLETE` at once on Floci 2.4.0). Code that relies on AppConfig refusing a bad version number, such as a release script that passes the wrong number, never sees that refusal here.
 - The lab prints what it saw and says which way it went, so it tells you if Floci starts validating the version.
 
 ## Stack
@@ -14,7 +14,7 @@
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: AppConfig
 - NuGet: `AWSSDK.AppConfig` 4.0.101.14, pinned in the `#:package` line at the top of `lab.cs`
-- Last verified against: Floci 2.4.0 (`floci/floci:latest`, November 2026)
+- Last verified against: Floci 2.5.0 (`floci/floci:latest`, November 2026)
 
 ## Run it
 
@@ -36,9 +36,9 @@ Expected output (the application name changes every run, and the deployment numb
 Application lab-4c7a9800f5ea, environment prod, hosted profile flags
 Published hosted version                -> 1
 GetHostedConfigurationVersion 9         -> ResourceNotFoundException
-StartDeployment of version 9            -> deployment 1, version 9, COMPLETE
+StartDeployment of version 9            -> deployment 1, version 9, BAKING
 
-Floci deployed a configuration version that does not exist, and reported the deployment done.
+Floci deployed a configuration version that does not exist.
   Code that relies on AppConfig refusing a bad version number never sees that refusal here.
 
 Cleanup -> removed 1 version(s), the profile, the environment, the application; application still listed: no
@@ -60,8 +60,8 @@ Set `FLOCI_ENDPOINT` if your Floci is somewhere else.
 
 ## Try changing...
 
-- Deploy version 1, the one that exists. Floci reads `COMPLETE` at once. Real AppConfig reads `DEPLOYING`, then `BAKING` for `AllAtOnce`'s ten-minute bake.
-- Change the application's description with `UpdateApplication`. Floci answers HTTP 405 with no body, not a 501, and so do the other three update operations.
+- Deploy version 1, the one that exists, straight after version 9. Floci 2.5.0 reads `BAKING` for `AllAtOnce`'s ten-minute bake, as AWS does (2.4.0 read `COMPLETE` at once), and starts it while version 9's deployment is still baking. Real AppConfig allows one active deployment per environment and refuses the second.
+- Change the application's description with `UpdateApplication`. Floci 2.5.0 updates it; `UpdateEnvironment`, `UpdateConfigurationProfile` and `UpdateDeploymentStrategy` still answer HTTP 405 with no body, not a 501.
 
 ## Author
 

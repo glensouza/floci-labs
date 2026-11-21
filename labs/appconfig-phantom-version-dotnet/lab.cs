@@ -100,7 +100,7 @@ try
 
     Console.WriteLine();
     Console.WriteLine(accepted
-        ? "Floci deployed a configuration version that does not exist, and reported the deployment done.\n  Code that relies on AppConfig refusing a bad version number never sees that refusal here."
+        ? "Floci deployed a configuration version that does not exist.\n  Code that relies on AppConfig refusing a bad version number never sees that refusal here."
         : "Floci refused the version that does not exist: it may validate it now. Re-read this lab.");
 }
 finally
