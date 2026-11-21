@@ -15,7 +15,7 @@
 - Language / runtime: C# on .NET 10, as a [file-based app](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (`dotnet run lab.cs`, no `.csproj`)
 - AWS services used: AppConfig, AppConfigData
 - NuGet: `AWSSDK.AppConfigData` 4.0.100.17 and `AWSSDK.AppConfig` 4.0.101.14, pinned in the `#:package` lines at the top of `lab.cs`. Two packages because AppConfigData only reads a configuration that has been deployed, and deploying one is AppConfig, a separate SDK.
-- Last verified against: Floci 2.4.0 (`floci/floci:latest`, November 2026)
+- Last verified against: Floci 2.5.0 (`floci/floci:latest`, November 2026)
 
 ## Run it
 
@@ -34,7 +34,7 @@ dotnet run lab.cs
 Expected output (the application name changes every run):
 
 ```text
-Application lab-fd6c93f30990: version 1 deployed to prod   -> COMPLETE
+Application lab-fd6c93f30990: version 1 deployed to prod   -> BAKING
 StartConfigurationSession, 60 s minimum interval -> token
 Poll 1                                   -> 20 bytes, version '1', next poll in 60 s
 Poll 2, 0 s later, nothing changed       -> 0 bytes, version ''
